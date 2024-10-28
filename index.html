@@ -1,261 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <main>
-      <div class="iddle">
-        <span>CALCU</span>
-        <span>LATOR</span>
-      </div>
-      <section>
 
-        <article>
-          
-            <label class="forbill" for="bill">Bill</label>
-            <input id="bill" type="text" value="0">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
 
-          <div id="keyboard">
+<body>
+  <main>
+    <div class="iddle">
+      <span>CALCU</span>
+      <span>LATOR</span>
+    </div>
+    <section>
 
-              <h1 class="tip number-1">Select Tip %</h1>
-              <button id="number-1" class="number-2" value="5">5%</button>
-              <button id="number-2" class="number-3" value="10">10%</button>
-              <button id="number-3" class="number-4" value="15">15%</button>
-              <button id="number-4" class="number-5" value="25">25%</button>
-              <button id="number-5" class="number-6" value="50">50%</button>
-              <div class="custom number-7">
-                 <button id="custom">Custom</button> 
-                 <input id="ipt-custom" type="number">
-              </div>
+      <article>
 
+        <label class="forbill" for="bill">Bill</label>
+        <input id="bill" type="text" value="100">
+
+        <div id="keyboard">
+
+          <h1 class="tip number-1">Select Tip %</h1>
+          <button id="number-1" class="number number-2 active" value="5">5%</button>
+          <button id="number-2" class="number number-3" value="10">10%</button>
+          <button id="number-3" class="number number-4" value="15">15%</button>
+          <button id="number-4" class="number number-5" value="25">25%</button>
+          <button id="number-5" class="number number-6" value="50">50%</button>
+          <div class="custom number-7">
+            <button id="custom">Custom</button>
+            <input id="ipt-custom" type="number" value="5">
           </div>
-    
-           <label class="people-label" for="people"><span>Number of People</span><span id="zero">Can't be zero</span></label>
-           <input id="people" type="text" value="0">
-        </article>
-        <aside>
-          <div class="numbers">
-            <div class="up">
-              <div class="labels">
-                <label for="up-screen">Tip Amount</label>
-                <strong>/ person</strong>
-              </div>
-              <div id="screen-1" class="typescreen screen-1">
-                <img src="icon-dollar.svg" alt=""><input type="text" disabled="disabled" value="0.00" id="screen">
-              </div>
+
+        </div>
+
+        <label class="people-label" for="people"><span>Number of People</span><span id="zero">Can't be
+            zero</span></label>
+        <input id="people" type="text" value="2">
+      </article>
+      <aside>
+        <div class="numbers">
+          <div class="up">
+            <div class="labels">
+              <label for="up-screen">Tip Amount</label>
+              <strong>/ person</strong>
             </div>
-            <div class="down">
-              <div class="labels">
-                <label for="down-screen">Total</label>
-                <strong>/ person</strong>
-              </div>
-              <div id="screen-2" class="typescreen screen-2">
-                <img src="icon-dollar.svg" alt=""><input type="text" disabled="disabled" value="00.0" id="screen-down">
-              </div>
+            <div id="screen-1" class="typescreen screen-1">
+              <img src="icon-dollar.svg" alt=""><input type="text" disabled="disabled" value="0.00" id="screen">
             </div>
           </div>
+          <div class="down">
+            <div class="labels">
+              <label for="down-screen">Total</label>
+              <strong>/ person</strong>
+            </div>
+            <div id="screen-2" class="typescreen screen-2">
+              <img src="icon-dollar.svg" alt=""><input type="text" disabled="disabled" value="00.0" id="screen-down">
+            </div>
+          </div>
+        </div>
+        <div id="buttons">
+          <button id="enter">ENTER</button>
           <button id="reset">RESET</button>
-        </aside>
-      </section>
-    </main>
-    <script>
-      window.addEventListener("load", calcul);
+        </div>
+      </aside>
+    </section>
+  </main>
+  <script>
+    window.addEventListener("load", calcul);
 
-function calcul(){
+    function calcul() {
+      var tipValue = 5;
+      var bill = document.getElementById("bill");
+      var people = document.getElementById("people");
+      var tipAmount = (bill.value * tipValue) / 100 / people.value;
+      
+      document.getElementById("screen").value = tipAmount;
+      var total = bill.value / people.value + tipAmount;
+      document.getElementById("screen-down").value = total;
 
-    var tipValue;
-    var bill=document.getElementById("bill");
-    
-    var people=document.getElementById("people");
-    
-    var tip1 = document.getElementById("number-1");
-    tip1.addEventListener("click", function(event) {
-        tipValue = tip1.value;
-        console.log(tipValue);
-        if (people.value >= 1 && bill.value >= 1) {
-            var tipAmount = ((bill.value * tipValue) / 100) / people.value;
+      for (let i = 0; i < document.getElementsByClassName("number").length; i++) {
+        document.getElementsByClassName("number")[i].addEventListener("click", function () {
+          
+          custom.style.display = "block";
+          tip6.style.display = "none";
+          for (let j = 0; j < document.getElementsByClassName("number").length; j++) {
+            document.getElementsByClassName("number")[j].classList.remove("active");
+          }
+          document.getElementsByClassName("number")[i].classList.add("active");
+          tipValue = document.getElementsByClassName("number")[i].value;
+          if (people.value >= 1 && bill.value >= 1) {
+            var tipAmount = (bill.value * tipValue) / 100 / people.value;
             document.getElementById("screen").value = tipAmount;
-            var total = (bill.value / people.value) + tipAmount;
+            var total = bill.value / people.value + tipAmount;
             document.getElementById("screen-down").value = total;
-          event.preventDefault();
+            event.preventDefault();
+          }
+        });
+      }
+
+      var custom = document.getElementById("custom");
+      custom.addEventListener("click", function () {
+        for (let j = 0; j < document.getElementsByClassName("number").length; j++) {
+          document.getElementsByClassName("number")[j].classList.remove("active");
         }
-    })
-    var tip2 = document.getElementById("number-2");
-    tip2.addEventListener("click", function(){
-        tipValue = tip2.value;
-    })
-    tip2.addEventListener("click", function(event) {
+        custom.style.display = "none";
+        tip6.style.display = "block";
+
+        if (tipValue < 5 || tipValue === "") {
+          tipValue = 5;
+          tip6.value = 5;
+        }
+
         if (people.value >= 1 && bill.value >= 1) {
-            var tipAmount = ((bill.value * tipValue) / 100) / people.value;
-            document.getElementById("screen").value = tipAmount;
-            var total = (bill.value / people.value) + tipAmount;
-            document.getElementById("screen-down").value = total;
+          var tipAmount = (bill.value * tipValue) / 100 / people.value;
+          document.getElementById("screen").value = tipAmount;
+          var total = bill.value / people.value + tipAmount;
+          document.getElementById("screen-down").value = total;
           event.preventDefault();
+        } else if (people.value < 1 && bill.value < 1) {
+          document.getElementById("screen").value = 0;
+          document.getElementById("screen-down").value = 0;
         }
-    })
-    var tip3 = document.getElementById("number-3");
-    tip3.addEventListener("click", function(){
-        tipValue = tip3.value;
-    })
-    tip3.addEventListener("click", function(event) {
-        if (people.value >= 1 && bill.value >= 1) {
-            var tipAmount = ((bill.value * tipValue) / 100) / people.value;
-            document.getElementById("screen").value = tipAmount;
-            var total = (bill.value / people.value) + tipAmount;
-            document.getElementById("screen-down").value = total;
-          event.preventDefault();
-        }
-    })
-    var tip4 = document.getElementById("number-4");
-    tip4.addEventListener("click", function(){
-        tipValue = tip4.value;
-    })
-    tip4.addEventListener("click", function(event) {
-        if (people.value >= 1 && bill.value >= 1) {
-            var tipAmount = ((bill.value * tipValue) / 100) / people.value;
-            document.getElementById("screen").value = tipAmount;
-            var total = (bill.value / people.value) + tipAmount;
-            document.getElementById("screen-down").value = total;
-          event.preventDefault();
-        }
-    })
-    var tip5 = document.getElementById("number-5");
-    tip5.addEventListener("click", function(){
-        tipValue = tip5.value;
-    })
-    tip5.addEventListener("click", function(event) {
-        if (people.value >= 1 && bill.value >= 1) {
-            var tipAmount = ((bill.value * tipValue) / 100) / people.value;
-            document.getElementById("screen").value = tipAmount;
-            var total = (bill.value / people.value) + tipAmount;
-            document.getElementById("screen-down").value = total;
-          event.preventDefault();
-        }
-    })
-    var custom = document.getElementById("custom");
-    custom.addEventListener("click", function(){
-        custom.style.display="none";
-        tip6.style.display="block";
-    })
-    var tip6 = document.getElementById("ipt-custom");
-    tip6.addEventListener("focus", function(event){
+      })
+
+      var tip6 = document.getElementById("ipt-custom");
+      tip6.addEventListener("input", function (event) {
+
         tipValue = tip6.value;
-    })
-    tip6.addEventListener("keypress", function(event) {
-        console.log(tipValue);
-        if (event.key === "Enter" && people.value >= 1 && bill.value >= 1) {
-            var tipAmount = ((bill.value * tipValue) / 100) / people.value;
-            document.getElementById("screen").value = tipAmount;
-            var total = (bill.value / people.value) + tipAmount;
-            document.getElementById("screen-down").value = total;
-        }
-        else if(event.key === "Enter" && people.value < 1 && bill.value < 1){
-            tipValue = tip6.value;
-        }
-    })
-    bill.addEventListener("focusin", function(){
-        if(tipValue < 0 && tipValue === "undefined")
-        {
-           tipValue = tip6.value;
-        }
-    })
-    people.addEventListener("focusin", function(){
-        if(tipValue < 0 && tipValue === "undefined")
-        {
-           tipValue = tip6.value;
-        }
-    })
-    
 
-    bill.addEventListener("click", function(){
-        if(bill.value == "0"){
-          bill.value="";
+        if (tipValue < 5 || tipValue === "") {
+          tipValue = 5;
+          tip6.value = 5;
+        }
+
+        if (people.value >= 1 && bill.value >= 1) {
+          var tipAmount = (bill.value * tipValue) / 100 / people.value;
+          document.getElementById("screen").value = tipAmount;
+          var total = bill.value / people.value + tipAmount;
+          document.getElementById("screen-down").value = total;
+          event.preventDefault();
+        } else if (people.value < 1 && bill.value < 1) {
+          document.getElementById("screen").value = 0;
+          document.getElementById("screen-down").value = 0;
+        }
+      })
+
+
+
+      bill.addEventListener("focusin", function () {
+        if (tipValue < 0 && tipValue === "undefined") {
+          tipValue = tip6.value;
         }
       });
-      bill.addEventListener("keypress", function(event) {
+      people.addEventListener("focusin", function () {
+        if (tipValue < 0 && tipValue === "undefined") {
+          tipValue = tip6.value;
+        }
+      });
+
+      bill.addEventListener("click", function () {
+        if (bill.value == "0") {
+          bill.value = "";
+        }
+      });
+      bill.addEventListener("keypress", function (event) {
         if (event.key === "Enter" && people.value >= 1 && bill.value >= 1) {
-            var tipAmount = ((bill.value * tipValue) / 100) / people.value;
-            document.getElementById("screen").value = tipAmount;
-            var total = (bill.value / people.value) + tipAmount;
-            document.getElementById("screen-down").value = total;
+          var tipAmount = (bill.value * tipValue) / 100 / people.value;
+          document.getElementById("screen").value = tipAmount;
+          var total = bill.value / people.value + tipAmount;
+          document.getElementById("screen-down").value = total;
           event.preventDefault();
+        } else if (event.key === "Enter" && people.value < 1 && bill.value < 1) {
+          alert("Entrez une valeur dans les champs et selectionner ou mentionnez votre tip");
+          document.getElementById("screen").value = 0;
+          document.getElementById("screen-down").value = 0;
         }
-        else if(event.key === "Enter" && people.value < 1 && bill.value < 1){
-            alert("Entrez une valeur dans les champs et selectionner ou mentionnez votre tip");
-            document.getElementById("screen").value = 0;
-            document.getElementById("screen-down").value = 0;
-        }
-      })
+      });
 
-    people.addEventListener("click", function(){
-        if(people.value == "0")
-        {
-          people.value="";
-        }
-        })
-
-    people.addEventListener("focusout", function(){
-        if(people.value == "0"){
+      people.addEventListener("click", function () {
+        if (people.value == "0") {
           people.value = "";
-          document.getElementById("zero").style.display= "flex";
         }
-        else{
-          document.getElementById("zero").style.display= "none";
-        }  
-      })
-      
-      people.addEventListener("keypress", function(event) {
+      });
+
+      people.addEventListener("focusout", function () {
+        if (people.value == "0") {
+          people.value = "";
+          document.getElementById("zero").style.display = "flex";
+        } else {
+          document.getElementById("zero").style.display = "none";
+        }
+      });
+
+      people.addEventListener("keypress", function (event) {
         if (event.key === "Enter" && people.value >= 1 && bill.value >= 1) {
-            var tipAmount = ((bill.value * tipValue) / 100) / people.value;
-            document.getElementById("screen").value = tipAmount;
-            var total = (bill.value / people.value) + tipAmount;
-            document.getElementById("screen-down").value = total;
+          var tipAmount = (bill.value * tipValue) / 100 / people.value;
+          document.getElementById("screen").value = tipAmount;
+          var total = bill.value / people.value + tipAmount;
+          document.getElementById("screen-down").value = total;
           event.preventDefault();
+        } else if (event.key === "Enter" && people.value < 1 && bill.value < 1) {
+          alert(
+            "Entrez une valeur dans les champs et selectionner ou mentionnez votre tip"
+          );
+          document.getElementById("screen").value = 0;
+          document.getElementById("screen-down").value = 0;
         }
-        else if(event.key === "Enter" && people.value < 1 && bill.value < 1){
-            alert("Entrez une valeur dans les champs et selectionner ou mentionnez votre tip");
-            document.getElementById("screen").value = 0;
-            document.getElementById("screen-down").value = 0;
-        }
-      })
-    
-      document.addEventListener("keypress", function(event) {
-        if(tip6.value > 0){
-            tipValue = tip6.value;
+      });
+
+      document.addEventListener("keypress", function (event) {
+        if (tip6.value > 0) {
+          tipValue = tip6.value;
         }
 
         if (event.key === "Enter" && people.value >= 1 && bill.value >= 1) {
-            var tipAmount = ((bill.value * tipValue) / 100) / people.value;
-            document.getElementById("screen").value = tipAmount;
-            var total = (bill.value / people.value) + tipAmount;
-            document.getElementById("screen-down").value = total;
+          var tipAmount = (bill.value * tipValue) / 100 / people.value;
+          document.getElementById("screen").value = tipAmount;
+          var total = bill.value / people.value + tipAmount;
+          document.getElementById("screen-down").value = total;
           event.preventDefault();
+        } else if (event.key === "Enter" && people.value < 1 && bill.value < 1) {
+          alert(
+            "Entrez une valeur dans les champs et selectionner ou mentionnez votre tip"
+          );
+          document.getElementById("screen").value = 0;
+          document.getElementById("screen-down").value = 0;
         }
-        else if(event.key === "Enter" && people.value < 1 && bill.value < 1){
-            alert("Entrez une valeur dans les champs et selectionner ou mentionnez votre tip");
-            document.getElementById("screen").value = 0;
-            document.getElementById("screen-down").value = 0;
-        }
-      })
-    
+      });
+
       var reset = document.getElementById("reset");
-      reset.addEventListener("click", function(){
+      document.getElementById("enter").addEventListener("click", function () {
+        if (people.value >= 1 && bill.value >= 1) {
+          var tipAmount = (bill.value * tipValue) / 100 / people.value;
+          document.getElementById("screen").value = tipAmount;
+          var total = bill.value / people.value + tipAmount;
+          document.getElementById("screen-down").value = total;
+          event.preventDefault();
+        } else if (people.value < 1 && bill.value < 1) {
+          document.getElementById("screen").value = 0;
+          document.getElementById("screen-down").value = 0;
+        }
+      });
+      reset.addEventListener("click", function () {
         tipValue = 0;
         bill.value = 0;
         people.value = 0;
         document.getElementById("screen").value = 0;
         document.getElementById("screen-down").value = 0;
-        console.log("yep");
-      })
-    }    
-    </script>
-  </body>
+      });
+    }  
+  </script>
+</body>
+
 </html>
